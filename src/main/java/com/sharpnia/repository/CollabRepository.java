@@ -1,4 +1,7 @@
 package com.sharpnia.repository;
 
-public interface CollabRepository {
+import com.sharpnia.models.Collab;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CollabRepository extends JpaRepository <Collab, Long> {
 }
