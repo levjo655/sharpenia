@@ -23,17 +23,17 @@ public class UserService {
 
     public User getUserById(int id) {
         try {
-            return userRepository.findById(id).get();
+            return userRepository.findById((long) id).get();
         } catch (NoSuchElementException e) {
             System.out.println("Could not find the requested user");
             throw new RuntimeException();
         }
     }
     public User updateUser(int id, User updatedUser) {
-        User existingUser = userRepository.findById(id)
+        User existingUser = userRepository.findById((long) id)
                 .orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
 
-        existingUser.setUserName(updatedUser.getUserName());
+        existingUser.setUsername(updatedUser.getUsername());
         existingUser.setEmail(updatedUser.getEmail());
         existingUser.setPassword(updatedUser.getPassword());
 
@@ -42,7 +42,7 @@ public class UserService {
 
     @DeleteMapping("/{id}")
     public String deleteUser (int id){
-        userRepository.deleteById(id);
+        userRepository.deleteById((long) id);
         return "User deleted";
     }
 }

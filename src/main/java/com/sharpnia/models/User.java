@@ -10,22 +10,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String userName;
+    private String username;
     private String password;
 
-    @Column (unique = true)
+    @Column(unique = true)
     private String email;
 
-
     public User() {
-
     }
 
-    public User(Integer id, String userName, String password, String email) {
+    public User(Integer id, String username, String password, String email) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public User(Object o, String username, String password) {
+        // Constructor logic can be expanded as needed
     }
 
     // Getters and setters
@@ -38,12 +40,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

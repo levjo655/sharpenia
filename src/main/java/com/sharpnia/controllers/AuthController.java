@@ -1,46 +1,54 @@
 package com.sharpnia.controllers;
 
+import com.sharpnia.models.User;
+import com.sharpnia.repository.UserRepository;
 import com.sharpnia.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
-    private AuthenticationManager authenticationManager;
-
+    AuthenticationManager authenticationManager;
     @Autowired
-    private JwtUtil jwtUtil;
-
+    UserRepository userRepository;
     @Autowired
-    UserDetailsService userDetailsService;
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody com.sharpnia.DTO.LoginRequest loginRequest) {
-        try {
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
-            authenticationManager.authenticate(authenticationToken);
-
-            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
-            String jwt = jwtUtil.generateToken(userDetails.getUsername());
-            return ResponseEntity.ok(Map.of("token", jwt));
-        } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-        }
+    PasswordEncoder encoder;
+    @Autowired
+    JwtUtil jwtUtils;
+    @PostMapping("/signin")
+    public String authenticateUser(@RequestBody User user) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getUsername(),
+                        user.getPassword()
+                )
+        );
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return jwtUtils.generateToken(userDetails.getUsername());
     }
-
+    @PostMapping("/signup")
+    public String registerUser(@RequestBody User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            return "Error: Username is already taken!";
+        }
+        // Create new user's account
+        User newUser = new User(
+                null,
+                user.getUsername(),
+                encoder.encode(user.getPassword()),
+                user.getEmail()
+        );
+        userRepository.save(newUser);
+        return "User registered successfully!";
+    }
 }
