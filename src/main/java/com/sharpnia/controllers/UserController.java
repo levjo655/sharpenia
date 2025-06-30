@@ -26,10 +26,10 @@ public class UserController {
         return userService.getAllUser();
     }
 
-    @GetMapping("{id}")
-    public User getUserById(@PathVariable("id") String id) {
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") long id) {
         try {
-            return userService.getUserById(Integer.parseInt(id));
+            return userService.getUserById((int) id);
         } catch (NoSuchElementException exeption){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
