@@ -1,12 +1,12 @@
 package com.sharpnia.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class JwtUtil {
     private SecretKey key;
    @PostConstruct
     public void init() {
-       this.key = new SecretKeySpec(jwtsecret.getBytes(StandardCharsets.UTF_8), "AES");
+       this.key = Keys.hmacShaKeyFor(jwtsecret.getBytes(StandardCharsets.UTF_8));
    }
 
    //generating Token
