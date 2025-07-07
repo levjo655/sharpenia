@@ -14,32 +14,14 @@ export default function Home() {
         <p className="text-lg max-w-xl text-center">
           Precision sharpening on Japanese natural stones. Handled with care, shaped with tradition.
         </p>
-
-        {/* Hero Section */}
-        <section className="py-24 px-6 text-center font-serif">
-          <h1 className="text-5xl md:text-6xl mb-4 tracking-tight">ÅGANE</h1>
-          <p className="text-xl md:text-2xl mb-6">
-            High-end Japanese Knife Sharpening & Collaboration
-          </p>
-          <a
+        <a
             href="#gallery"
             className="inline-block border border-[#2f2e2c] px-6 py-2 text-sm tracking-wide hover:bg-[#2f2e2c] hover:text-white transition"
           >
             View Gallery
           </a>
-        </section>
 
-        {/* Quote + About Section */}
-        <section className="text-center py-16 px-6 max-w-3xl mx-auto font-serif">
-          <p className="text-xl italic mb-6">
-            “The edge is a reflection of the smith’s intent — I only bring it into focus.”
-          </p>
-          <p className="text-base leading-relaxed">
-            Born from the meeting point between Japanese tradition and European steel.<br />
-            Every edge is polished by hand on natural stones — with reverence for the craft.
-          </p>
-        </section>
-
+      
         {/* Collaborations Section */}
         <section className="py-16 px-6">
           <h2 className="text-2xl text-center mb-8 font-serif">
@@ -55,7 +37,9 @@ export default function Home() {
               </div>
             </div>
           </div>
+          
         </section>
+        
 
         {/* Contact Section */}
         <section id="contact" className="bg-white py-20 px-6 text-center">
