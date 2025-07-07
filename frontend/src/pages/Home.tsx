@@ -12,7 +12,7 @@ export default function Home() {
       <main className="flex-grow flex flex-col items-center justify-center py-20">
         <h2 className="text-4xl font-serif mb-4">Welcome to Ågane</h2>
         <p className="text-lg max-w-xl text-center">
-          Precision sharpening on Japanese natural stones. Handled with care, shaped with tradition.
+          High end Sharpening with japanese natural stones! 
         </p>
         <a
             href="#gallery"
