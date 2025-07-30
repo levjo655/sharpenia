@@ -1,6 +1,8 @@
 package com.sharpnia.controllers;
 
 import com.sharpnia.models.User;
+import com.sharpnia.payload.request.SigninRequest;
+import com.sharpnia.payload.request.SignupRequest;
 import com.sharpnia.repository.UserRepository;
 import com.sharpnia.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +28,27 @@ public class AuthController {
     @Autowired
     JwtUtil jwtUtils;
     @PostMapping("/signin")
-    public String authenticateUser(@RequestBody User user) {
+    public String authenticateUser(@RequestBody SigninRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        user.getPassword()
+                        request.getEmail(),
+                        request.getPassword()
                 )
         );
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return jwtUtils.generateToken(userDetails.getUsername());
     }
     @PostMapping("/signup")
-    public String registerUser(@RequestBody User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
+    public String registerUser(@RequestBody SignupRequest request) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             return "Error: Username is already taken!";
         }
         // Create new user's account
         User newUser = new User(
                 null,
-                user.getUsername(),
-                encoder.encode(user.getPassword()),
-                user.getEmail()
+                request.getUsername(),
+                encoder.encode(request.getPassword()),
+                request.getEmail()
         );
         userRepository.save(newUser);
         return "User registered successfully!";

@@ -64,6 +64,49 @@ export const collabs = [
           "/images/covre_gyuto_3.jpg",
           "/images/covre_gyuto_4.jpg"
         ],
+      },
+      {
+        id: "Merion Forge",
+        name: "Merion Forge x Ågane part 2",
+        description: "Hand-forged in Brazil - Hand polished at Ågane.A whopping 300mm sujihiki (slicer) wrapped up with delicious suminagashi secret recipe from the talented Eduardo.  ",
+        instagram: "@merion_forge",
+        link: "https://www.instagram.com/merion_forge?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+        images: [
+          "/images/merion_suji_1.jpg",
+          "/images/merion_suji_2.jpg",
+          "/images/merion_suji_3.jpg",
+          "/images/merion_suji_4.jpg",
+          "/images/merion_suji_5.jpg"
+        
+        ],
+      },
+      {
+        id: "Merion Forge",
+        name: "Merion Forge x Ågane part 1",
+        description: "Hand-forged in Brazil - Hand polished at Ågane.A whopping 300mm sujihiki (slicer) wrapped up with delicious suminagashi secret recipe from the talented Eduardo.  ",
+        instagram: "@merion_forge",
+        link: "https://www.instagram.com/merion_forge?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+        images: [
+          "/images/merion_petty_1.jpg",
+          "/images/merion_petty_2.jpg",
+          "/images/merion_petty_3.jpg",
+          "/images/merion_petty_4.jpg",
+          "/images/merion_petty_5.jpg"
+        
+        ],
+      },
+      {
+        id: "Munetoshi bloomery",
+        name: "Munetoshi bloomery x Ågane  * commissioned work not a collab",
+        description: "Hand-forged in Brazil - Hand polished at Ågane.A whopping 300mm sujihiki (slicer) wrapped up with delicious suminagashi secret recipe from the talented Eduardo.  ",
+        images: [
+          "/images/munetoshi_1.jpg",
+          "/images/munetoshi_2.jpg",
+          "/images/munetoshi_3.jpg",
+          "/images/munetoshi_4.jpg",
+          "/images/munetoshi_5.jpg"
+        ],
       }
+      
   ];
   
