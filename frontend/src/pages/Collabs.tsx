@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { collabs } from "../data/collabs";
+import * as FaIcons from "react-icons/fa";
 
 export default function CollabsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [copySuccess, setCopySuccess] = useState<string>("");
 
   const openModal = (images: string[]) => {
     setModalImages(images);
@@ -18,6 +20,48 @@ export default function CollabsPage() {
     setModalOpen(false);
     setModalImages([]);
     setCurrentIndex(0);
+    setCopySuccess("");
+  };
+
+  const getShareUrls = (name: string, link: string) => {
+    const encodedName = encodeURIComponent(name);
+    const encodedLink = encodeURIComponent(link);
+    const text = encodeURIComponent(`Check out this knife collaboration: ${name}`);
+    return {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`,
+      twitter: `https://twitter.com/intent/tweet?url=${encodedLink}&text=${text}`,
+      whatsapp: `https://api.whatsapp.com/send?text=${text}%20${encodedLink}`,
+      reddit: `https://www.reddit.com/submit?url=${encodedLink}&title=${encodedName}`,
+      // Instagram removed here
+    };
+  };
+
+  const copyToClipboard = (text: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopySuccess("Copied!");
+        setTimeout(() => setCopySuccess(""), 2000);
+      });
+    } else {
+      // fallback for older browsers
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand("copy");
+        setCopySuccess("Copied!");
+        setTimeout(() => setCopySuccess(""), 2000);
+      } catch {
+        setCopySuccess("Failed to copy");
+      }
+      document.body.removeChild(textArea);
+    }
   };
 
   return (
@@ -34,36 +78,93 @@ export default function CollabsPage() {
         </section>
 
         <section className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 pb-16">
-          {collabs.map((collab) => (
-            <div
-              key={collab.id}
-              className="bg-white border border-[#eae7e2] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer"
-              onClick={() => openModal(collab.images)}
-            >
-              <img
-                src={collab.images[0]}
-                alt={collab.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="font-serif text-lg mb-1">{collab.name}</h3>
-                <p className="text-sm text-gray-600 mb-2">
-                  {collab.description}
-                </p>
-                {collab.instagram && collab.link && (
-                  <a
-                    href={collab.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-blue-600 hover:underline"
+          {collabs.map((collab) => {
+            const shareUrls = getShareUrls(collab.name, collab.link || "");
+            return (
+              <div
+                key={collab.id}
+                className="bg-white border border-[#eae7e2] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer"
+                onClick={() => openModal(collab.images)}
+              >
+                <img
+                  src={collab.images[0]}
+                  alt={collab.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="font-serif text-lg mb-1">{collab.name}</h3>
+                  <p className="text-sm text-gray-600 mb-2">{collab.description}</p>
+                  {collab.instagram && collab.link && (
+                    <a
+                      href={collab.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-blue-600 hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {collab.instagram}
+                    </a>
+                  )}
+
+                  {/* Share icons */}
+                  <div
+                    className="flex gap-3 mt-3 items-center"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    {collab.instagram}
-                  </a>
-                )}
+                    <span className="text-sm text-gray-500">Share:</span>
+                    <a
+                      href={shareUrls.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-blue-700"
+                      aria-label="Share on Facebook"
+                    >
+                      {FaIcons.FaFacebookF({ size: 20 })}
+                    </a>
+                    <a
+                      href={shareUrls.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-sky-500"
+                      aria-label="Share on Twitter"
+                    >
+                      {FaIcons.FaTwitter({ size: 20 })}
+                    </a>
+                    <a
+                      href={shareUrls.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-green-600"
+                      aria-label="Share on WhatsApp"
+                    >
+                      {FaIcons.FaWhatsapp({ size: 20 })}
+                    </a>
+                    <a
+                      href={shareUrls.reddit}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-orange-600"
+                      aria-label="Share on Reddit"
+                    >
+                      {FaIcons.FaRedditAlien({ size: 20 })}
+                    </a>
+
+                    {/* Copy link share */}
+                    <button
+                      onClick={() => copyToClipboard(collab.link || "")}
+                      className="text-gray-500 hover:text-gray-900 text-sm underline"
+                      aria-label="Copy link to clipboard"
+                    >
+                      Share Link
+                    </button>
+                    {copySuccess && (
+                      <span className="text-green-600 text-xs ml-1">{copySuccess}</span>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </section>
       </main>
 
