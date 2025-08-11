@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { collabs } from "../data/collabs";
+import { collabs, Collab } from "../data/collabs";
 import * as FaIcons from "react-icons/fa";
 
 export default function CollabsPage() {
@@ -10,40 +10,31 @@ export default function CollabsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [copySuccess, setCopySuccess] = useState<string>("");
 
-  const openModal = (images: string[]) => {
-    setModalImages(images);
-    setCurrentIndex(0);
-    setModalOpen(true);
+  const getShareLink = (collab: Collab) => {
+    return collab.link || `${window.location.origin}/collabs/${collab.id}`;
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalImages([]);
-    setCurrentIndex(0);
-    setCopySuccess("");
-  };
-
-  const getShareUrls = (name: string, link: string) => {
-    const encodedName = encodeURIComponent(name);
-    const encodedLink = encodeURIComponent(link);
-    const text = encodeURIComponent(`Check out this knife collaboration: ${name}`);
+  const getShareUrls = (collab: Collab) => {
+    const shareLink = getShareLink(collab);
+    const encodedName = encodeURIComponent(collab.name);
+    const encodedLink = encodeURIComponent(shareLink);
+    const text = encodeURIComponent(`Check out this knife collaboration: ${collab.name}`);
     return {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`,
       twitter: `https://twitter.com/intent/tweet?url=${encodedLink}&text=${text}`,
       whatsapp: `https://api.whatsapp.com/send?text=${text}%20${encodedLink}`,
       reddit: `https://www.reddit.com/submit?url=${encodedLink}&title=${encodedName}`,
-      // Instagram removed here
     };
   };
 
-  const copyToClipboard = (text: string) => {
+  const copyToClipboard = (collab: Collab) => {
+    const text = getShareLink(collab);
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
         setCopySuccess("Copied!");
         setTimeout(() => setCopySuccess(""), 2000);
       });
     } else {
-      // fallback for older browsers
       const textArea = document.createElement("textarea");
       textArea.value = text;
       textArea.style.position = "fixed";
@@ -64,6 +55,19 @@ export default function CollabsPage() {
     }
   };
 
+  const openModal = (images: string[]) => {
+    setModalImages(images);
+    setCurrentIndex(0);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImages([]);
+    setCurrentIndex(0);
+    setCopySuccess("");
+  };
+
   return (
     <div className="min-h-dvh flex flex-col bg-[#fdfaf6] text-[#2f2e2c]">
       <Header />
@@ -79,7 +83,7 @@ export default function CollabsPage() {
 
         <section className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 pb-16">
           {collabs.map((collab) => {
-            const shareUrls = getShareUrls(collab.name, collab.link || "");
+            const shareUrls = getShareUrls(collab);
             return (
               <div
                 key={collab.id}
@@ -87,7 +91,7 @@ export default function CollabsPage() {
                 onClick={() => openModal(collab.images)}
               >
                 <img
-                  src={collab.images[0]}
+                  src={collab.thumbnail || collab.images[0]}
                   alt={collab.name}
                   className="w-full h-48 object-cover"
                 />
@@ -106,7 +110,6 @@ export default function CollabsPage() {
                     </a>
                   )}
 
-                  {/* Share icons */}
                   <div
                     className="flex gap-3 mt-3 items-center"
                     onClick={(e) => e.stopPropagation()}
@@ -117,43 +120,36 @@ export default function CollabsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-blue-700"
-                      aria-label="Share on Facebook"
                     >
-                      {FaIcons.FaFacebookF({ size: 20 })}
+                      <FaIcons.FaFacebookF size={20} />
                     </a>
                     <a
                       href={shareUrls.twitter}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-sky-500"
-                      aria-label="Share on Twitter"
                     >
-                      {FaIcons.FaTwitter({ size: 20 })}
+                      <FaIcons.FaTwitter size={20} />
                     </a>
                     <a
                       href={shareUrls.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-green-600"
-                      aria-label="Share on WhatsApp"
                     >
-                      {FaIcons.FaWhatsapp({ size: 20 })}
+                      <FaIcons.FaWhatsapp size={20} />
                     </a>
                     <a
                       href={shareUrls.reddit}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-orange-600"
-                      aria-label="Share on Reddit"
                     >
-                      {FaIcons.FaRedditAlien({ size: 20 })}
+                      <FaIcons.FaRedditAlien size={20} />
                     </a>
-
-                    {/* Copy link share */}
                     <button
-                      onClick={() => copyToClipboard(collab.link || "")}
+                      onClick={() => copyToClipboard(collab)}
                       className="text-gray-500 hover:text-gray-900 text-sm underline"
-                      aria-label="Copy link to clipboard"
                     >
                       Share Link
                     </button>
@@ -168,7 +164,6 @@ export default function CollabsPage() {
         </section>
       </main>
 
-      {/* Modal */}
       {modalOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
@@ -192,7 +187,6 @@ export default function CollabsPage() {
                   alt="Zoomed knife view"
                   className="w-full h-auto rounded"
                 />
-
                 {currentIndex > 0 && (
                   <button
                     className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 px-3 py-1 rounded-r hover:bg-opacity-100"
@@ -201,7 +195,6 @@ export default function CollabsPage() {
                     ◀
                   </button>
                 )}
-
                 {currentIndex < modalImages.length - 1 && (
                   <button
                     className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 px-3 py-1 rounded-l hover:bg-opacity-100"
