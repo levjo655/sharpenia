@@ -11,6 +11,24 @@ export interface Collab {
 
 export const collabs: Collab[] = [
   {
+    id: "Smedjaaspen",
+    name: "Smedjaaspen x Ågane ",
+    description:
+      "Over the past three years, I’ve been relentlessly pursuing the craft of sharpening—refining my skills and pushing myself to reach new levels of precision. This particular blade marks a milestone for me—it’s the cleanest and most refined work I’ve done to date, and I’m proud to share it with you all. TWR core steel and a gorgeous cladding sporting wrought iron and a nickel line to bring everything together. Complete stone progession all the way to mikawa natural stone. ",
+    instagram: "@smedjaaspen",
+    thumbnail: "/images/aspen_3.jpg",
+    link: "https://www.instagram.com/smedjaaspen?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    images: [
+      "/images/aspen_3.jpg",
+      "/images/aspen_2.jpg",
+      "/images/aspen_1.jpg",
+      "/images/aspen_4.jpg",
+      "/images/aspen_5.jpg",
+      "/images/aspen_6.jpg",
+      "/images/aspen_7.jpg",
+    ],
+  },
+  {
     id: "covre",
     name: "Eduardo Covre x Ågane",
     description:
