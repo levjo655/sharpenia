@@ -4,9 +4,6 @@ import Footer from "../components/Footer";
 import { collabs } from "../data/collabs";
 import { FaFacebookF, FaTwitter, FaWhatsapp, FaReddit } from "react-icons/fa";
 
-
-
-
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImages, setModalImages] = useState<string[]>([]);
@@ -62,7 +59,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-dvh w-full flex flex-col bg-[#fdfaf6] text-[#2f2e2c]">
+    <div className="min-h-dvh w-full flex flex-col bg-[#fdfaf6] text-[#2f2e2c] font-serif">
       <Header />
 
       <main className="flex-grow flex flex-col items-center justify-center py-20">
@@ -78,35 +75,49 @@ export default function Home() {
         </a>
 
         {/* Intro Section */}
-        <section className="py-16 px-6 text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-serif mb-8">Hello!</h2>
-          <div className="text-lg leading-relaxed text-justify space-y-6">
-            <p>
-              My name is Levjo Cibuku, and I’m the sharpener behind Ågane. What
-              began as an innocent chef knife purchase quickly turned into a
-              full-blown obsession.
-            </p>
-            <p>
-              I still remember the first time I used that Japanese knife — I was
-              mesmerized. The precision, the feel, the edge… and just like that,
-              I realized how far off my old knives had been.
-            </p>
-            <p>
-              Of course, a sharp knife doesn’t stay sharp forever — and that’s
-              when I discovered whetstones. I started practicing on cheap knives,
-              offering free sharpening to friends, and slowly honing my craft.
-            </p>
-            <p>
-              Years later, after relentless trial, passion, and dedication, Ågane
-              was born.
-            </p>
-            <p>
-              Today, Ågane is all about combining traditional sharpening
-              techniques with meaningful collaborations. I work closely with
-              world-renowned blacksmiths to bring out the true soul of each blade
-              — making home cooks, chefs, and knife lovers as happy as I was with
-              that very first cut.
-            </p>
+        <section className="py-16 px-6 max-w-6xl mx-auto">
+          <h2 className="text-3xl font-serif mb-8 text-center">Hello!</h2>
+
+          <div className="flex flex-col md:flex-row gap-10 items-stretch">
+            {/* IMAGE */}
+            <div className="flex-shrink-0 w-full md:w-1/3">
+              <img
+                src="/images/agane_main_pic.jpg"
+                alt="Ågane sharpening"
+                className="rounded-lg shadow-lg w-full h-full object-cover"
+              />
+            </div>
+
+            {/* TEXT */}
+            <div className="w-full md:w-1/2 text-base leading-relaxed text-justify space-y-4 flex flex-col justify-center">
+              <p>
+                My name is Levjo Cibuku, and I’m the sharpener behind Ågane.
+                What began as an innocent chef knife purchase quickly turned
+                into a full-blown obsession.
+              </p>
+              <p>
+                I still remember the first time I used that Japanese knife — I
+                was mesmerized. The precision, the feel, the edge… and just like
+                that, I realized how far off my old knives had been.
+              </p>
+              <p>
+                Of course, a sharp knife doesn’t stay sharp forever — and that’s
+                when I discovered whetstones. I started practicing on cheap
+                knives, offering free sharpening to friends, and slowly honing
+                my craft.
+              </p>
+              <p>
+                Years later, after relentless trial, passion, and dedication,
+                Ågane was born.
+              </p>
+              <p>
+                Today, Ågane is all about combining traditional sharpening
+                techniques with meaningful collaborations. I work closely with
+                world-renowned blacksmiths to bring out the true soul of each
+                blade — making home cooks, chefs, and knife lovers as happy as I
+                was with that very first cut.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -180,8 +191,7 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className="text-gray-500 hover:text-orange-600"
                       >
-                    <FaReddit size={20} />
-
+                        <FaReddit size={20} />
                       </a>
 
                       <button
@@ -199,6 +209,82 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </section>
+        {/* Services Overview */}
+        <section className="py-16 px-6 bg-[#f7f4ef]">
+          <h2 className="text-2xl text-center mb-10 font-serif">
+            Sharpening Services
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Edge Sharpening */}
+            <div className="bg-white border border-[#e8e5df] rounded-lg overflow-hidden shadow-sm">
+              <img
+                src="images/edge_sharpening.jpeg"
+                alt="Edge sharpening example"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-serif mb-2">Edge Sharpening</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Precision hand sharpening on Japanese whetstones for a
+                  razor-sharp, long-lasting edge.
+                </p>
+                <a
+                  href="/sharpening"
+                  className="text-sm font-semibold text-blue-600 hover:underline"
+                >
+                  Learn More →
+                </a>
+              </div>
+            </div>
+
+            {/* Bevel Polishing */}
+            <div className="bg-white border border-[#e8e5df] rounded-lg overflow-hidden shadow-sm">
+              <img
+                src="images/bevel_sharpening.jpg"
+                alt="Bevel polishing example"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-serif mb-2">Bevel Polishing</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Complete stone-shaped bevel geometry for performance, beauty,
+                  and easy upkeep.
+                </p>
+                <a
+                  href="/sharpening"
+                  className="text-sm font-semibold text-blue-600 hover:underline"
+                >
+                  Learn More →
+                </a>
+              </div>
+            </div>
+
+            {/* Full Stone Polishing */}
+            <div className="bg-white border border-[#e8e5df] rounded-lg overflow-hidden shadow-sm">
+              <img
+                src="images/full_stone_sharpening.jpg"
+                alt="Full stone polish example"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-serif mb-2">
+                  Full Stone Polishing
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  The ultimate finish — full blade restoration with the finest
+                  Japanese natural stones.
+                </p>
+                <a
+                  href="/sharpening"
+                  className="text-sm font-semibold text-blue-600 hover:underline"
+                >
+                  Learn More →
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
