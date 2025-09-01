@@ -66,9 +66,9 @@ export default function Header() {
                 <Link to="/collabs" className="text-[#2f2e2c] hover:underline underline-offset-4">
                   Collabs
                 </Link>
-                <Link to="/gallery" className="text-[#2f2e2c] hover:underline underline-offset-4">
+                {/* <Link to="/gallery" className="text-[#2f2e2c] hover:underline underline-offset-4">
                   Gallery
-                </Link>
+                </Link> */}
               </nav>
 
               <div className="flex justify-center">
@@ -81,9 +81,9 @@ export default function Header() {
                 <Link to="/sharpening" className="text-[#2f2e2c] hover:underline underline-offset-4">
                   Sharpening
                 </Link>
-                <Link to="/about" className="text-[#2f2e2c] hover:underline underline-offset-4">
+                {/* <Link to="/about" className="text-[#2f2e2c] hover:underline underline-offset-4">
                   About
-                </Link>
+                </Link> */}
                 <Link
                   to="/contact"
                   className="rounded-full border border-[#2f2e2c] text-[#2f2e2c] px-4 py-1 hover:bg-[#2f2e2c] hover:text-white transition"

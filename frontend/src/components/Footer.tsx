@@ -28,9 +28,9 @@ export default function Footer() {
             <div className="flex flex-col items-center gap-2 mb-4 text-sm">
               <Link to="/" className="hover:underline">Home</Link>
               <Link to="/collabs" className="hover:underline">Collabs</Link>
-              <Link to="/gallery" className="hover:underline">Gallery</Link>
+              {/* <Link to="/gallery" className="hover:underline">Gallery</Link> */}
               <Link to="/sharpening" className="hover:underline">Sharpening</Link>
-              <Link to="/about" className="hover:underline">About</Link>
+              {/* <Link to="/about" className="hover:underline">About</Link> */}
               <Link
                 to="/contact"
                 className="rounded-full border border-[#2f2e2c] px-4 py-1 hover:bg-[#2f2e2c] hover:text-white transition"
@@ -56,9 +56,9 @@ export default function Footer() {
               </div>
 
               <div className="flex justify-end space-x-6">
-                <Link to="/gallery" className="hover:underline">Gallery</Link>
+                {/* <Link to="/gallery" className="hover:underline">Gallery</Link> */}
                 <Link to="/sharpening" className="hover:underline">Sharpening</Link>
-                <Link to="/about" className="hover:underline">About</Link>
+                {/* <Link to="/about" className="hover:underline">About</Link> */}
                 <Link
                   to="/contact"
                   className="rounded-full border border-[#2f2e2c] px-4 py-1 hover:bg-[#2f2e2c] hover:text-white transition"

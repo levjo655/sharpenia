@@ -61,7 +61,7 @@ export default function Contact() {
               <p className="text-[#2f2e2c]">+46 70 848 5534</p>
             </div>
             <p className="text-[#6e6b67] mt-4">
-              Fill out the form and we’ll get back to you as soon as possible.
+              Fill out the form and i’ll get back to you as soon as possible.
             </p>
           </div>
 
