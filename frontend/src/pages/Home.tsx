@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { collabs } from "../data/collabs";
 import { FaFacebookF, FaTwitter, FaWhatsapp, FaReddit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -211,6 +212,7 @@ export default function Home() {
             })}
           </div>
         </section>
+
         {/* Services Overview */}
         <section className="py-16 px-6 bg-[#f7f4ef]">
           <h2 className="text-2xl text-center mb-10 font-serif">
@@ -231,12 +233,12 @@ export default function Home() {
                   Precision hand sharpening on Japanese whetstones for a
                   razor-sharp, long-lasting edge.
                 </p>
-                <a
-                  href="/sharpening"
+                <Link
+                  to="/sharpening"
                   className="text-sm font-semibold text-blue-600 hover:underline"
                 >
                   Learn More →
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -253,12 +255,12 @@ export default function Home() {
                   Complete stone-shaped bevel geometry for performance, beauty,
                   and easy upkeep.
                 </p>
-                <a
-                  href="/sharpening"
+                <Link
+                  to="/sharpening"
                   className="text-sm font-semibold text-blue-600 hover:underline"
                 >
                   Learn More →
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -277,12 +279,12 @@ export default function Home() {
                   The ultimate finish — full blade restoration with the finest
                   Japanese natural stones.
                 </p>
-                <a
-                  href="/sharpening"
+                <Link
+                  to="/sharpening.html"
                   className="text-sm font-semibold text-blue-600 hover:underline"
                 >
                   Learn More →
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -303,6 +305,17 @@ export default function Home() {
               +46 70 848 5534
             </a>
           </p>
+          <p className="text-lg">
+            📷 Instagram:{" "}
+            <a
+              href="https://www.instagram.com/agane.knives?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline text-pink-600 hover:text-pink-800"
+            >
+              @agane.knives
+            </a>
+          </p>
         </section>
       </main>
 
@@ -316,19 +329,20 @@ export default function Home() {
             className="bg-white p-4 rounded-lg shadow-lg max-w-3xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Absolute Close Button */}
             <button
-              className="text-sm text-gray-500 float-right hover:text-black mb-2"
+              className="absolute top-2 right-2 text-lg text-gray-600 hover:text-black z-10"
               onClick={closeModal}
             >
-              ✕ Close
+              ✕
             </button>
 
             {modalImages.length > 0 && (
-              <div className="relative">
+              <div className="relative flex items-center justify-center">
                 <img
                   src={modalImages[currentIndex]}
                   alt="Zoomed knife view"
-                  className="w-full h-auto rounded"
+                  className="max-h-[80vh] max-w-full object-contain mx-auto rounded"
                 />
 
                 {currentIndex > 0 && (

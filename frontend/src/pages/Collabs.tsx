@@ -18,7 +18,9 @@ export default function CollabsPage() {
     const shareLink = getShareLink(collab);
     const encodedName = encodeURIComponent(collab.name);
     const encodedLink = encodeURIComponent(shareLink);
-    const text = encodeURIComponent(`Check out this knife collaboration: ${collab.name}`);
+    const text = encodeURIComponent(
+      `Check out this knife collaboration: ${collab.name}`
+    );
     return {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedLink}`,
       twitter: `https://twitter.com/intent/tweet?url=${encodedLink}&text=${text}`,
@@ -97,7 +99,9 @@ export default function CollabsPage() {
                 />
                 <div className="p-4">
                   <h3 className="font-serif text-lg mb-1">{collab.name}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{collab.description}</p>
+                  <p className="text-sm text-gray-600 mb-2">
+                    {collab.description}
+                  </p>
                   {collab.instagram && collab.link && (
                     <a
                       href={collab.link}
@@ -154,7 +158,9 @@ export default function CollabsPage() {
                       Share Link
                     </button>
                     {copySuccess && (
-                      <span className="text-green-600 text-xs ml-1">{copySuccess}</span>
+                      <span className="text-green-600 text-xs ml-1">
+                        {copySuccess}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -173,20 +179,22 @@ export default function CollabsPage() {
             className="bg-white p-4 rounded-lg shadow-lg max-w-3xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Close Button */}
             <button
-              className="text-sm text-gray-500 float-right hover:text-black mb-2"
+              className="absolute top-2 right-2 text-lg text-gray-600 hover:text-black z-10"
               onClick={closeModal}
             >
-              ✕ Close
+              ✕
             </button>
 
             {modalImages.length > 0 && (
-              <div className="relative">
+              <div className="relative flex items-center justify-center">
                 <img
                   src={modalImages[currentIndex]}
                   alt="Zoomed knife view"
-                  className="w-full h-auto rounded"
+                  className="max-h-[80vh] max-w-full object-contain mx-auto rounded"
                 />
+
                 {currentIndex > 0 && (
                   <button
                     className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 px-3 py-1 rounded-r hover:bg-opacity-100"
@@ -195,6 +203,7 @@ export default function CollabsPage() {
                     ◀
                   </button>
                 )}
+
                 {currentIndex < modalImages.length - 1 && (
                   <button
                     className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 px-3 py-1 rounded-l hover:bg-opacity-100"

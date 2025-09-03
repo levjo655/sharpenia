@@ -50,20 +50,33 @@ export default function Contact() {
         </h1>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-xl font-medium mb-2">📧 Email</h2>
-              <p className="text-[#2f2e2c]">info@agane.se</p>
-            </div>
-            <div>
-              <h2 className="text-xl font-medium mb-2">📞 Phone</h2>
-              <p className="text-[#2f2e2c]">+46 70 848 5534</p>
-            </div>
-            <p className="text-[#6e6b67] mt-4">
-              Fill out the form and i’ll get back to you as soon as possible.
-            </p>
-          </div>
+         {/* Contact Info */}
+<div className="space-y-6">
+  <div>
+    <h2 className="text-xl font-medium mb-2">📧 Email</h2>
+    <p className="text-[#2f2e2c]">info@agane.se</p>
+  </div>
+  <div>
+    <h2 className="text-xl font-medium mb-2">📞 Phone</h2>
+    <p className="text-[#2f2e2c]">+46 70 848 5534</p>
+  </div>
+  <div>
+    <h2 className="text-xl font-medium mb-2">📷 Instagram</h2>
+    <a
+      href="https://www.instagram.com/agane.knives?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-[#2f2e2c] underline hover:text-pink-600"
+    >
+      @agane.knives
+    </a>
+  </div>
+
+  <p className="text-[#6e6b67] mt-4">
+    Fill out the form and I’ll get back to you as soon as possible.
+  </p>
+</div>
+
 
           {/* Contact Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
