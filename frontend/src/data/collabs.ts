@@ -11,6 +11,27 @@ export interface Collab {
 
 export const collabs: Collab[] = [
   {
+
+    id: "Morandi",
+    name: "Morandi x Ågane ",
+    description:
+      "Suminagashi clad (soft iron with 15n20) with a 52100 core, water quenched. Lucas went crazy on that hollow forged hira so I had to get even by offering a convex bevel for a superior cutting feeling. 225x50mmm & rocking a imperial jacaranda handle. ",
+    instagram: "@Morandi.cut",
+    thumbnail: "/images/morandi_8.jpg",
+    link: "https://www.instagram.com/morandi.cut?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+    images: [
+      "/images/morandi_8.jpg",
+      "/images/morandi_7.jpg",
+      "/images/morandi_6.jpg",
+      "/images/morandi_5.jpg",
+      "/images/morandi_4.jpg",
+      "/images/morandi_3.jpg",
+      "/images/morandi_2.jpg",
+      "/images/morandi_1.jpg",
+    ],
+  },
+
+  {
     id: "Smedjaaspen",
     name: "Smedjaaspen x Ågane ",
     description:

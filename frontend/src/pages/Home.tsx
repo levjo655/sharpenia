@@ -10,6 +10,7 @@ export default function Home() {
   const [modalImages, setModalImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+
   const openModal = (images: string[]) => {
     setModalImages(images);
     setCurrentIndex(0);
